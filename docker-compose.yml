@@ -1,0 +1,25 @@
+db:
+    image: mysql
+    ports:
+    - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: symfonyrootpass
+        MYSQL_DATABASE: symfony
+        MYSQL_USER: symfony
+        MYSQL_PASSWORD: symfonypass
+
+worker:
+    image: orocrm
+    ports:
+    - "8080:80"
+    links:
+    - db
+    volumes:
+    - ./attachment:/var/www/app/app/attachment
+#    environment:
+#        INSTALL: true
+#        DB_1_PORT_3306_TCP_ADDR: 172.17.42.1
+#        DB_1_PORT_3306_TCP_PORT: 3306
+#        DB_1_ENV_MYSQL_DATABASE: orocrm
+#        DB_1_ENV_MYSQL_USER: orouser
+#        DB_1_ENV_MYSQL_PASSWORD: oropass
